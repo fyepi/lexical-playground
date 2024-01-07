@@ -6,9 +6,9 @@
  *
  */
 
-import type {SettingName} from '../appSettings';
+import type { SettingName } from "../appSettings";
 
-import * as React from 'react';
+import * as React from "react";
 import {
   createContext,
   ReactNode,
@@ -16,9 +16,10 @@ import {
   useContext,
   useMemo,
   useState,
-} from 'react';
+  useEffect,
+} from "react";
 
-import {DEFAULT_SETTINGS} from '../appSettings';
+import { DEFAULT_SETTINGS } from "../appSettings";
 
 type SettingsContextShape = {
   setOption: (name: SettingName, value: boolean) => void;
@@ -32,12 +33,18 @@ const Context: React.Context<SettingsContextShape> = createContext({
   settings: DEFAULT_SETTINGS,
 });
 
+/**
+ * options: setting options that overrides default settings
+ */
+
 export const SettingsContext = ({
   children,
+  options,
 }: {
   children: ReactNode;
+  options?: Record<SettingName, boolean>;
 }): JSX.Element => {
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState({ ...options, ...DEFAULT_SETTINGS });
 
   const setOption = useCallback((setting: SettingName, value: boolean) => {
     setSettings((options) => ({
@@ -52,8 +59,12 @@ export const SettingsContext = ({
   }, []);
 
   const contextValue = useMemo(() => {
-    return {setOption, settings};
+    return { setOption, settings };
   }, [setOption, settings]);
+
+  useEffect(() => {
+    setSettings({ ...options, ...DEFAULT_SETTINGS });
+  }, [options]);
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
@@ -77,5 +88,5 @@ function setURLParam(param: SettingName, value: null | boolean) {
     }
   }
   url.search = params.toString();
-  window.history.pushState(null, '', url.toString());
+  window.history.pushState(null, "", url.toString());
 }
