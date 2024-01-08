@@ -181,7 +181,6 @@ export default function Editor(): JSX.Element {
             <LinkPlugin />
             <TwitterPlugin />
             <YouTubePlugin />
-            <FigmaPlugin />
             {!isEditable && <LexicalClickableLinkPlugin />}
             <HorizontalRulePlugin />
             <ExcalidrawPlugin />
@@ -225,9 +224,7 @@ export default function Editor(): JSX.Element {
         {isAutocomplete && <AutocompletePlugin />}
         <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
         {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
-        <ActionsPlugin isRichText={isRichText} />
       </div>
-      {showTreeView && <TreeViewPlugin />}
     </>
   );
 }

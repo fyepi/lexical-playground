@@ -143,12 +143,6 @@ function App(): JSX.Element {
             <div className="editor-shell">
               <Editor />
             </div>
-            <Settings />
-            {isDevPlayground ? <DocsPlugin /> : null}
-            {isDevPlayground ? <PasteLogPlugin /> : null}
-            {isDevPlayground ? <TestRecorderPlugin /> : null}
-
-            {measureTypingPerf ? <TypingPerfPlugin /> : null}
           </SharedAutocompleteContext>
         </TableContext>
       </SharedHistoryContext>

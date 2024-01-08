@@ -903,19 +903,6 @@ export default function ToolbarPlugin({
         </DropDown>
       ) : (
         <>
-          <FontDropDown
-            disabled={!isEditable}
-            style={"font-family"}
-            value={fontFamily}
-            editor={editor}
-          />
-          <FontDropDown
-            disabled={!isEditable}
-            style={"font-size"}
-            value={fontSize}
-            editor={editor}
-          />
-          <Divider />
           <button
             disabled={!isEditable}
             onClick={() => {
